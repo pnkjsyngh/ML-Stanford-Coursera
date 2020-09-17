@@ -33,9 +33,9 @@ num_labels = 10;          % 10 labels, from 1 to 10
 fprintf('Loading and Visualizing Data ...\n')
 
 load('ex3data1.mat'); % training data stored in arrays X, y
-m = size(X, 1);
+m = size(X, 1)
 
-% Randomly select 100 data points to display
+## Randomly select 100 data points to display
 rand_indices = randperm(m);
 sel = X(rand_indices(1:100), :);
 
@@ -74,13 +74,15 @@ pause;
 fprintf('\nTraining One-vs-All Logistic Regression...\n')
 
 lambda = 0.1;
+
+
 [all_theta] = oneVsAll(X, y, num_labels, lambda);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 
-%% ================ Part 3: Predict for One-Vs-All ================
+## ================ Part 3: Predict for One-Vs-All ================
 
 pred = predictOneVsAll(all_theta, X);
 

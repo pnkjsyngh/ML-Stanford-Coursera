@@ -52,14 +52,14 @@ pause;
 fprintf('\nLoading Saved Neural Network Parameters ...\n')
 
 % Load the weights into variables Theta1 and Theta2
-load('ex3weights.mat');
-
-%% ================= Part 3: Implement Predict =================
-%  After training the neural network, we would like to use it to predict
-%  the labels. You will now implement the "predict" function to use the
-%  neural network to predict the labels of the training set. This lets
-%  you compute the training set accuracy.
-
+load('ex3weights.mat')
+##
+## ================= Part 3: Implement Predict =================
+##  After training the neural network, we would like to use it to predict
+##  the labels. You will now implement the "predict" function to use the
+##  neural network to predict the labels of the training set. This lets
+##  you compute the training set accuracy.
+##
 pred = predict(Theta1, Theta2, X);
 
 fprintf('\nTraining Set Accuracy: %f\n', mean(double(pred == y)) * 100);
