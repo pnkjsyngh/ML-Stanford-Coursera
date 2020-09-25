@@ -61,25 +61,56 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+% Modifying the input layer to add bias unit
+X = [ones(m, 1) X];
+a1 = X;
 
+% Output of Layer 2
+z2 = a1*Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(m, 1) a2];
 
+% Output of Layer 3
+z3 = a2*Theta2';
+a3 = sigmoid(z3);
 
+% Looping over all the input samples to evaluate Cost function and Gradients
+for i = 1:m
+    temp = zeros(num_labels,1);
+    temp(y(i)) = 1;
+    J = J + (-log(a3(i,:))*temp - log(1 - a3(i,:))*(1 - temp));   
+ 
+    delta3 = a3(i,:)' - temp;
+    delta2 = Theta2'*delta3.*sigmoidGradient([1, z2(i,:)]');
+    
+    Theta1_grad = Theta1_grad + delta2(2:end)*a1(i,:);
+    Theta2_grad = Theta2_grad + delta3*a2(i,:);
+endfor
 
+% Compiling all the cost and gradient information
+J = J/m;
+Theta1_grad = Theta1_grad/m;
+Theta2_grad = Theta2_grad/m;
 
+% Incorporating the regularization in cost function for first layer
+J_reg = 0;
+for j = 1:hidden_layer_size
+  for i = 2:input_layer_size+1
+    J_reg = J_reg + Theta1(j,i)^2;
+  endfor
+endfor
+% Incorporating the regularization in cost function for second layer
+for j = 1:num_labels
+  for i = 2:hidden_layer_size+1
+    J_reg = J_reg + Theta2(j,i)^2;
+  endfor
+endfor
+% Compiling the cost fucntion pieces to get full cost including regularization
+J = J + J_reg*lambda/2/m;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+% Incorporating the regularization in for gradients
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + (lambda/m)*Theta1(:,2:end);
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + (lambda/m)*Theta2(:,2:end);
 % -------------------------------------------------------------
 
 % =========================================================================
