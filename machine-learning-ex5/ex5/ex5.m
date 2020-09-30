@@ -48,88 +48,88 @@ pause;
 %  regression. 
 %
 
-##theta = [1 ; 1];
-##J = linearRegCostFunction([ones(m, 1) X], y, theta, 1);
-##
-##fprintf(['Cost at theta = [1 ; 1]: %f '...
-##         '\n(this value should be about 303.993192)\n'], J);
-##
-##fprintf('Program paused. Press enter to continue.\n');
-##pause;
-##
-##%% =========== Part 3: Regularized Linear Regression Gradient =============
-##%  You should now implement the gradient for regularized linear 
-##%  regression.
-##%
-##
-##theta = [1 ; 1];
-##[J, grad] = linearRegCostFunction([ones(m, 1) X], y, theta, 1);
-##
-##fprintf(['Gradient at theta = [1 ; 1]:  [%f; %f] '...
-##         '\n(this value should be about [-15.303016; 598.250744])\n'], ...
-##         grad(1), grad(2));
-##
-##fprintf('Program paused. Press enter to continue.\n');
-##pause;
-##
-##
-##%% =========== Part 4: Train Linear Regression =============
-##%  Once you have implemented the cost and gradient correctly, the
-##%  trainLinearReg function will use your cost function to train 
-##%  regularized linear regression.
-##% 
-##%  Write Up Note: The data is non-linear, so this will not give a great 
-##%                 fit.
-##%
-##
-##%  Train linear regression with lambda = 0
-##lambda = 0;
-##[theta] = trainLinearReg([ones(m, 1) X], y, lambda);
-##
-##%  Plot fit over the data
-##plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
-##xlabel('Change in water level (x)');
-##ylabel('Water flowing out of the dam (y)');
-##hold on;
-##plot(X, [ones(m, 1) X]*theta, '--', 'LineWidth', 2)
-##hold off;
-##
-##fprintf('Program paused. Press enter to continue.\n');
-##pause;
-##
-##
-##%% =========== Part 5: Learning Curve for Linear Regression =============
-##%  Next, you should implement the learningCurve function. 
-##%
-##%  Write Up Note: Since the model is underfitting the data, we expect to
-##%                 see a graph with "high bias" -- Figure 3 in ex5.pdf 
-##%
-##
-##lambda = 0;
-##[error_train, error_val] = ...
-##    learningCurve([ones(m, 1) X], y, ...
-##                  [ones(size(Xval, 1), 1) Xval], yval, ...
-##                  lambda);
-##
-##plot(1:m, error_train, 1:m, error_val);
-##title('Learning curve for linear regression')
-##legend('Train', 'Cross Validation')
-##xlabel('Number of training examples')
-##ylabel('Error')
-##axis([0 13 0 150])
-##
-##fprintf('# Training Examples\tTrain Error\tCross Validation Error\n');
-##for i = 1:m
-##    fprintf('  \t%d\t\t%f\t%f\n', i, error_train(i), error_val(i));
-##end
-##
-##fprintf('Program paused. Press enter to continue.\n');
-##pause;
-##
-##%% =========== Part 6: Feature Mapping for Polynomial Regression =============
-##%  One solution to this is to use polynomial regression. You should now
-##%  complete polyFeatures to map each example into its powers
-##%
+theta = [1 ; 1];
+J = linearRegCostFunction([ones(m, 1) X], y, theta, 1);
+
+fprintf(['Cost at theta = [1 ; 1]: %f '...
+         '\n(this value should be about 303.993192)\n'], J);
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+%% =========== Part 3: Regularized Linear Regression Gradient =============
+%  You should now implement the gradient for regularized linear 
+%  regression.
+%
+
+theta = [1 ; 1];
+[J, grad] = linearRegCostFunction([ones(m, 1) X], y, theta, 1);
+
+fprintf(['Gradient at theta = [1 ; 1]:  [%f; %f] '...
+         '\n(this value should be about [-15.303016; 598.250744])\n'], ...
+         grad(1), grad(2));
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+
+%% =========== Part 4: Train Linear Regression =============
+%  Once you have implemented the cost and gradient correctly, the
+%  trainLinearReg function will use your cost function to train 
+%  regularized linear regression.
+% 
+%  Write Up Note: The data is non-linear, so this will not give a great 
+%                 fit.
+%
+
+%  Train linear regression with lambda = 0
+lambda = 0;
+[theta] = trainLinearReg([ones(m, 1) X], y, lambda);
+
+%  Plot fit over the data
+plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
+xlabel('Change in water level (x)');
+ylabel('Water flowing out of the dam (y)');
+hold on;
+plot(X, [ones(m, 1) X]*theta, '--', 'LineWidth', 2)
+hold off;
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+
+%% =========== Part 5: Learning Curve for Linear Regression =============
+%  Next, you should implement the learningCurve function. 
+%
+%  Write Up Note: Since the model is underfitting the data, we expect to
+%                 see a graph with "high bias" -- Figure 3 in ex5.pdf 
+%
+
+lambda = 0;
+[error_train, error_val] = ...
+    learningCurve([ones(m, 1) X], y, ...
+                  [ones(size(Xval, 1), 1) Xval], yval, ...
+                  lambda);
+
+plot(1:m, error_train, 1:m, error_val);
+title('Learning curve for linear regression')
+legend('Train', 'Cross Validation')
+xlabel('Number of training examples')
+ylabel('Error')
+axis([0 13 0 150])
+
+fprintf('# Training Examples\tTrain Error\tCross Validation Error\n');
+for i = 1:m
+    fprintf('  \t%d\t\t%f\t%f\n', i, error_train(i), error_val(i));
+end
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+%% =========== Part 6: Feature Mapping for Polynomial Regression =============
+%  One solution to this is to use polynomial regression. You should now
+%  complete polyFeatures to map each example into its powers
+%
 
 p = 8;
 
@@ -165,7 +165,7 @@ pause;
 ##  lambda to see how the fit and learning curve change.
 
 
-lambda = 0;
+lambda = 3;
 [theta] = trainLinearReg(X_poly, y, lambda);
 
 % Plot training data and fit
@@ -205,17 +205,17 @@ pause;
 [lambda_vec, error_train, error_val] = ...
     validationCurve(X_poly, y, X_poly_val, yval);
 
-##close all;
-##plot(lambda_vec, error_train, lambda_vec, error_val);
-##legend('Train', 'Cross Validation');
-##xlabel('lambda');
-##ylabel('Error');
-##
-##fprintf('lambda\t\tTrain Error\tValidation Error\n');
-##for i = 1:length(lambda_vec)
-##	fprintf(' %f\t%f\t%f\n', ...
-##            lambda_vec(i), error_train(i), error_val(i));
-##end
-##
-##fprintf('Program paused. Press enter to continue.\n');
-##pause;
+close all;
+plot(lambda_vec, error_train, lambda_vec, error_val);
+legend('Train', 'Cross Validation');
+xlabel('lambda');
+ylabel('Error');
+
+fprintf('lambda\t\tTrain Error\tValidation Error\n');
+for i = 1:length(lambda_vec)
+	fprintf(' %f\t%f\t%f\n', ...
+            lambda_vec(i), error_train(i), error_val(i));
+end
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
