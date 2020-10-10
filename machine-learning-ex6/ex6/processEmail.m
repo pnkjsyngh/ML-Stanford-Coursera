@@ -53,6 +53,7 @@ fprintf('\n==== Processed Email ====\n\n');
 
 % Process file
 l = 0;
+idx = 1;
 
 while ~isempty(email_contents)
 
@@ -97,14 +98,13 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-
-
-
-
-
-
-
-
+    for i=1:length(vocabList)
+      if strcmp(str, vocabList{i})
+        word_indices(idx) = i;
+        idx = idx + 1;
+        continue;
+      endif
+    endfor
 
     % =============================================================
 
