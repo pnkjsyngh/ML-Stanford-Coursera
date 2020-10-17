@@ -25,9 +25,17 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
-
-
-
+##var = zeros(m,1);
+##for i = 1:K
+##  var = (idx==i);
+##  sample_size = sum(var);
+##  centroids(i,1) = (X(:,1)'*var)/sample_size;
+##  centroids(i,2) = (X(:,2)'*var)/sample_size;
+##endfor
+for i = 1:K
+  list_of_points = find(idx==i);
+  centroids(i,:) = sum(X(list_of_points,:))/length(list_of_points);
+endfor
 
 
 

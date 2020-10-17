@@ -20,14 +20,21 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
+##D1 = dot((X - centroids(1,:)),(X - centroids(1,:)),2);
+##D2 = dot((X - centroids(2,:)),(X - centroids(2,:)),2);
+##D3 = dot((X - centroids(3,:)),(X - centroids(3,:)),2);
+##D = [D1, D2, D3];
+##[M,idx] = min(D,[],2);
 
 
-
-
-
-
-
+for i=1:size(X,1)
+  d_arr = zeros(1,K);
+  for j = 1:K
+    d_arr(j) = (X(i,:)-centroids(j,:))*(X(i,:)-centroids(j,:))';
+  endfor
+  [M,var] = min(d_arr);
+  idx(i) = var;
+endfor
 % =============================================================
-
 end
 
